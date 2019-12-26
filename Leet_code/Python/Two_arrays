@@ -1,0 +1,19 @@
+
+class Solution:
+    def twoSum(nums, target)
+        if len(nums) <= 1:
+            return False
+        buffer_dictionary = { }
+        for i in range(len(nums)):
+            if nums[i] in buffer_dictionary:
+                return [buffer_dictionary[nums[i]], i]
+            else:
+                buffer_dictionary[target - nums[i]] = i
+
+
+def main():
+
+    nums = [6,4,13,7,4,56,456,73,23,2]
+    target = 19
+    ref= Solution().twoSum(nums, target)
+    print(ref)
