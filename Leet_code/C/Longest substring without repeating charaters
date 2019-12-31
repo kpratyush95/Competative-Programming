@@ -1,0 +1,31 @@
+int lengthOfLongestSubstring(char * s)
+{
+ if(s)
+ { 
+  char *visited[128] ={NULL};
+  char *walker = NULL;
+  char *temp = NULL;
+  walker = (s);
+  int len=0;
+  while(*walker)
+  {
+    temp = visited[*walker];
+    visited[*walker]= walker;
+    if(temp >=s)
+    {
+        if((walker-s)>len)
+        {   
+            len = walker-s;
+        }
+        s = temp+1;
+    }
+     walker++;
+  }
+  if((walker-s)>len)
+  {
+      len = walker-s;
+  }
+  return len; 
+ }
+  return 0;  
+}
