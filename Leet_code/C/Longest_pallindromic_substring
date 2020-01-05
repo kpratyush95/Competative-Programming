@@ -1,0 +1,55 @@
+/*
+Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+
+Example 1:
+
+Input: "babad"
+Output: "bab"
+Note: "aba" is also a valid answer.
+Example 2:
+
+Input: "cbbd"
+Output: "bb"
+*/
+
+#define MAX(a,b)(a>b? a:b)
+int expand_around_center(char *string, int length_s, char *left, char *right);
+
+char * longestPalindrome(char * s)
+{
+    if(s!=NULL && (*s)>=1)
+    {
+        char *start =s; 
+        char *end =s;
+        char *walker =s;
+        int length_s = strlen(s);
+        int len=0;
+        char *substring = malloc(sizeof(char)*(length_s+2));
+        for(;walker<(s+length_s-1);walker++)
+        {
+            int len_1 = expand_around_center(s, length_s,walker, walker);
+            int len_2 = expand_around_center(s, length_s,walker, walker+1);
+            len = MAX(len_1, len_2);
+            if(len > end-start)
+            {
+                start = walker - (len -1)/2;
+                end = walker +len/2;
+            }
+        }
+        int length =end - start+1;
+        strncpy(substring,start , length);
+        substring[length]='\0';
+        return substring;
+    }
+    return "";
+}
+
+int expand_around_center(char *string, int length_s, char *left, char *right)
+{
+    while(left>=string && right<(string+length_s) && (*left)==(*right))
+    {
+        left--;
+        right++;
+    }
+    return right-left-1;
+}
