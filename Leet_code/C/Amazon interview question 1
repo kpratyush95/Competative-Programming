@@ -1,0 +1,32 @@
+
+
+
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct pair
+{
+   int x ;
+   int y ;
+
+}Pair;
+
+Pair IDsOfSongs(int rideDuration, int numSongs, int *songDurations);
+
+
+Pair IDsOfSongs(int rideDuration, int numSongs, int *songDurations)
+{
+  Pair *numbers = malloc(sizeof(Pair));
+  if(numbers!=NULL && numSongs>0 && rideDuration>0 && songDurations!=NULL)
+    {
+        for(int i=0; i<numSongs; i++)
+          {
+            for(int j=numSongs-1;j>0; j--)
+             {
+                if((songDurations[i]+songDurations[j])==(rideDuration)-5)
+                    {
+                        numbers->x = songDurations[i];
+                        numbers->y = songDurations[j];
+                        printf("%d, %d",numbers->x,numbers->y);
+                         return *numbers;
+                    }
