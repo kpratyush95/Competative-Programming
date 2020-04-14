@@ -1,0 +1,83 @@
+/*
+Given a non-empty, singly linked list with head node head, return a middle node of linked list.
+
+If there are two middle nodes, return the second middle node.
+
+ 
+
+Example 1:
+
+Input: [1,2,3,4,5]
+Output: Node 3 from this list (Serialization: [3,4,5])
+The returned node has value 3.  (The judge's serialization of this node is [3,4,5]).
+Note that we returned a ListNode object ans, such that:
+ans.val = 3, ans.next.val = 4, ans.next.next.val = 5, and ans.next.next.next = NULL.
+Example 2:
+
+Input: [1,2,3,4,5,6]
+Output: Node 4 from this list (Serialization: [4,5,6])
+Since the list has two middle nodes with values 3 and 4, we return the second one.
+ 
+
+Note:
+
+The number of nodes in the given list will be between 1 and 100.
+*/
+
+
+/*best to do using turtle hare algorithm
+Let's have two pointers to our linked list. The first one (turtle) moves by one each time while the second one (hare) moves by two. When the hare reaches the end of the list, the turtle should be in the middle.
+
+The tricky thing here is handling even/odd length list, so let's go through the two cases
+
+[1, 2, 3, 4] NULL
+t
+h
+[1, 2, 3, 4] NULL
+    t
+       h
+[1, 2, 3, 4] NULL
+        t
+              h
+Here we stop when h = NULL.
+
+[1, 2, 3, 4, 5]
+ t
+ h
+[1, 2, 3, 4, 5]
+    t
+       h
+[1, 2, 3, 4, 5]
+       t
+             h
+Here we stop when h.next == NULL. This never happens in an even-length list (the last node is even, i.e. 4 in the example above), the hare only jumps on odd numbers (i.e. 3), so after the last odd number it jumps directly to NULL.
+
+Therefore our exit conditions are either h == NULL || h.next == NULL.
+*/
+
+
+ Definition for singly-linked list.
+  public class ListNode 
+  {
+      int val;
+      ListNode next;
+      ListNode(int x) { val = x; }
+  }
+ 
+class Solution {
+    public ListNode middleNode(ListNode head) 
+    {
+        if(head!=null)
+        {
+            ListNode turtle, hare;
+            turtle= hare = head;
+            while(hare!=null && hare.next!=null)
+            {
+                turtle = turtle.next;
+                hare = hare.next.next;
+            }
+            return turtle;
+        }
+        return null;
+    }   
+}
