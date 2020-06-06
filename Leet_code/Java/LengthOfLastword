@@ -14,17 +14,21 @@ Output: 5
 class Solution {
     public int lengthOfLastWord(String s)
     {
-        int end = s.length()-1;
-        while(end>=0 && s.charAt(end) ==' ')
+        if(s.length()>0)
         {
-            end--;
+            int end = s.length()-1;
+            while(end>=0 && s.charAt(end) ==' ')
+            {
+                end--;
+            }
+            int start = 0;
+            while(end>=0 && s.charAt(end)!= ' ')
+            {
+                start++;
+                end--;
+            }
+            return start;
         }
-        int start = 0;
-        while(end>=0 && s.charAt(end)!= ' ')
-        {
-            start++;
-            end--;
-        }
-        return start;
+        return 0;
     }
 }
