@@ -1,0 +1,61 @@
+/*Given two binary strings, return their sum (also a binary string).
+
+The input strings are both non-empty and contains only characters 1 or 0.
+
+Example 1:
+
+Input: a = "11", b = "1"
+Output: "100"
+Example 2:
+
+Input: a = "1010", b = "1011"
+Output: "10101"
+ 
+
+Constraints:
+
+Each string consists only of '0' or '1' characters.
+1 <= a.length, b.length <= 10^4
+Each string is either "0" or doesn't contain any leading zero.
+*/
+
+class Solution {
+    public String addBinary(String a, String b) 
+    {
+        int l1 = a.length()-1;
+        int l2 = b.length()-1;
+        int buf =0, sum=0;
+        StringBuilder sb = new StringBuilder();
+        while(l1>=0 || l2>=0)
+        {
+            int n1 =0, n2=0;
+            if(l1>=0)
+            {
+                n1 = a.charAt(l1)-'0';
+            }
+            if(l2>=0)
+            {
+                n2 = b.charAt(l2) -'0';
+            }
+            sum = n1+n2+buf;
+            if(sum>1)
+            {
+                sum= sum%2;
+                buf = 1;
+                sb.append(Integer.toString(sum));
+            }
+            else
+            {
+                buf=0;
+                sb.append(Integer.toString(sum));
+            }
+            l1--;
+            l2--;
+        }
+        if(buf==1)
+        {
+            sb.append(Integer.toString(buf));
+        }
+        return sb.reverse().toString();
+    }
+}
