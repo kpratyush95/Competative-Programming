@@ -26,8 +26,24 @@ Constraints:
 -10^6 <= nums[i] <= 10^6
 */
 
+==================================================================
+/* Time Complexity O(n)
+Space Complexity O(1) */
+class Solution {
+    public int[] runningSum(int[] nums) 
+    {
+      for(int i = 1; i< nums.length; i++)
+      {
+            nums[i] = nums[i-1] + nums[i];
+      }
+        return nums;
+    }
+}
+===================================================================
+/*Time Complexity O(n) as we are using 1 for loop
+Space Complexity O(n) Creating a new Array
+*/
 
-import java.util.ArrayList;
 class Solution {
     public int[] runningSum(int[] nums) 
     {
@@ -48,15 +64,4 @@ class Solution {
 }
 
 
-======================================================= Better way to save space is
-
-class Solution {
-    public int[] runningSum(int[] nums) 
-    {
-      for(int i = 1; i< nums.length; i++)
-      {
-            nums[i] = nums[i-1] + nums[i];
-      }
-        return nums;
-    }
-}
+======================================================= 
