@@ -1,0 +1,79 @@
+/*
+Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array.
+
+Example 1:
+
+Input: [3,0,1]
+Output: 2
+Example 2:
+
+Input: [9,6,4,2,3,5,7,0,1]
+Output: 8
+Note:
+Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?
+*/
+
+================================================================================================
+XOR method
+Epalanation
+            0 ^ 0 = 0
+            1 ^ 1 = 0
+            0 ^ 1 = 1
+            a ^ a = 0
+            a ^ b = b ^ a
+            a ^ (b ^ c) = (a ^ b) ^ c
+            The array contains n numbers from range [0, n], which covers n+1 numbers. So there must be one missing. 
+            The index of the array is in [0, n-1], while the value is in the range [0, n].
+            We use the property: a ^ a = 0 and a ^ a ^ b = b. If there's no missing number,
+            
+            
+            XOR of indexes = 0 ^ 1 ^ ... ^ n-1
+            XOR of numbers = 0 ^ 1 ^ ... ^ n-1 ^ n
+            XOR of indexes ^ XOR of numbers = n
+            XOR of indexes ^ XOR of numbers ^ n = 0
+            Now let's take the missing number into consideration.
+
+            XOR of indexes = 0 ^ 1 ^ ... ^ n-1
+            XOR of numbers = 0 ^ 1 ^ ... ^ n-1 ^ n, except for the missing number
+            XOR of indexes ^ XOR of numbers = missing nunber ^ n
+            XOR of indexes ^ XOR of numbers ^ n = missing number
+            
+            Time Complexity O(n)
+            Space Complexity O(1)
+            
+class Solution {
+    public int missingNumber(int[] nums)
+    {
+        int missing  = nums.length;
+        for(int i=0; i< nums.length; i++)
+        {
+            missing ^= i ^ nums[i];
+        }
+        return missing;
+    }
+}
+========================================================================================================================================================
+Using HashMap of Set
+Time Complexity O(n)
+Space Complexity O(n)
+
+class Solution {
+    public int missingNumber(int[] nums)
+    {
+        Set<Integer> set = new HashSet<Integer>();
+        for(int num : nums )
+        {
+            set.add(num);
+        }
+        for(int i =0; i< nums.length+1; i++)
+        {
+            if(!set.contains(i))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+===========================================================================================================================================================
+
