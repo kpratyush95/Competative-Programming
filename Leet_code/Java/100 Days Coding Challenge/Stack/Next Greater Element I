@@ -49,3 +49,37 @@ class Solution {
         return new int[0];
     }
 }
+==================================================================================================================================
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) 
+    {
+        if(nums1.length> 1 && nums2.length> 1 && nums1.length<1001 && nums2.length<1001 && nums1.length<=nums2.length)
+        {
+            Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+            int pointer = 0;
+            int [] res= new int[nums1.length];
+            Stack <Integer> stack= new Stack<>();
+            for(int i=0; i< nums2.length; i++)
+            {
+                map.put(nums2[i], i);
+            }
+            for(int i = 0; i<nums1.length; i++)
+            {
+                int j = map.get(nums1[i])+1;
+                int max = Integer.MIN_VALUE;
+                while(j< nums2.length)
+                {
+                    if(nums2[j]> nums1[i])
+                    {
+                        max = nums2[j];
+                        break;
+                    }
+                    j+=1;
+                }
+                res[pointer++] = max == Integer.MIN_VALUE ? -1 : max;
+            }
+    	    return res;
+        }
+        return new int[0];
+    }
+}
