@@ -95,3 +95,28 @@ class Solution
     }
 }
 ================================================================================================================================================================================
+HashMap and Sliding Window:
+Time Complexity O(n)
+Space Complexity : O(n)
+class Solution 
+{
+    public int lengthOfLongestSubstring(String s) 
+    {
+       Map<Character, Integer> hashmap =new HashMap<>();
+       int left =0, result=0;
+        if(s.length()>0)
+        {
+            for(int right=0; right<s.length(); right++)
+            {
+                if(hashmap.containsKey(s.charAt(right)))
+                {
+                    left = Math.max(left, hashmap.get(s.charAt(right)));
+                }
+                result = Math.max(result, right-left+1);
+                hashmap.put(s.charAt(right), right+1);
+            }
+            
+        }
+        return result;
+    }
+}
