@@ -95,3 +95,24 @@ class Solution {
     }
 }
 ===========================================================================================================================================================
+Using hash set
+Time Complexity O(n)
+Space Complexity O(n)
+class Solution {
+    public boolean containsDuplicate(int[] nums) 
+    {
+       Set hashset = new HashSet<>();
+        for(int i=0; i< nums.length; i++)
+        {
+            if(hashset.contains(nums[i]))
+            {
+                return true;
+            }
+            else
+            {
+                hashset.add(nums[i]);
+            }
+        }
+        return false;
+    }
+}
