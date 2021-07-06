@@ -40,7 +40,7 @@ The sum of lists[i].length won't exceed 10^4.
 
 Approach 1 Merge List one by one
 
-Time Complexity O(kN)
+Time Complexity O(NlogN)
 Space Complexity O(1)
 
 /**
@@ -91,7 +91,7 @@ class Solution {
 ====================================================================================================================================================
 
 Approach 2: Using Priority Queue
-Time Complexity O(kN)
+Time Complexity O(NlogN)
 Space Complexity O(n)
 
 /**
